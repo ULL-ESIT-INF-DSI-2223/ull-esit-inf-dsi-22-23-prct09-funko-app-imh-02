@@ -12,7 +12,7 @@
 
 import 'mocha';
 import {expect} from 'chai';
-import {Funko, TiposFunko, GeneroFunko} from '../../src/funko/funko';
+import {Funko, TiposFunko, GeneroFunko} from '../../src/funko/funko.js';
 
 describe('Getter y setters de un Funko', () => {
   const harryPotter = new Funko(1, "Harry Potter", "Personaje Principal de la saga Harry Potter", TiposFunko.POP, GeneroFunko.PELICULAS, "Harry Potter", 1, false, "Cabeza balancea", 20);
@@ -37,7 +37,7 @@ describe('Getter y setters de un Funko', () => {
   });
 
   it("Getter de la franquicia resulta 'Harry Potter' ", () => {
-    expect(harryPotter.tipo).to.be.eql("Harry Potter");
+    expect(harryPotter.franquicia).to.be.eql("Harry Potter");
   });
 
   it("Getter del número de franquicia resulta 1", () => {
@@ -55,5 +55,52 @@ describe('Getter y setters de un Funko', () => {
   it("Getter del valor resulta 20 ", () => {
     expect(harryPotter.valor).to.be.eql(20);
   });
+
+  it("Setter del nombre resulta Capitan América ", () => {
+    harryPotter.setnombre("Capitán América");
+    expect(harryPotter.nombre).to.be.eql("Capitán América");
+  });
+
+  it("Setter del tipo resulta POPRIDES ", () => {
+    harryPotter.setTipo(TiposFunko.POPRIDES);
+    expect(harryPotter.tipo).to.be.eql(TiposFunko.POPRIDES);
+  });
+
+  it("Setter de la descripción resulta Personaje relevante en Marvel ", () => {
+    harryPotter.setDescripcion("Personaje relevante en Marvel");
+    expect(harryPotter.descripcion).to.be.eql("Personaje relevante en Marvel");
+  });
+
+  it("Setter del género resulta Animación ", () => {
+    harryPotter.setGenero(GeneroFunko.ANIMACION);
+    expect(harryPotter.genero).to.be.eql(GeneroFunko.ANIMACION);
+  });
+
+  it("Setter de la franquicia rresulta 'Marvel' ", () => {
+    harryPotter.setFranquicia("Marvel")
+    expect(harryPotter.franquicia).to.be.eql("Marvel");
+  });
+
+  it("Setter del número de franquicia resulta 2 ", () => {
+    harryPotter.setNumeroFranquicia(2);
+    expect(harryPotter.numeroFranquicia).to.be.eql(2);
+  });
+
+  it("Setter de exclusivo resulta true ", () => {
+    harryPotter.setExclusivo(true);
+    expect(harryPotter.exclusivo).to.be.eql(true);
+  });
+
+  it("Setter de las características especiales 'Tiene un escudo' ", () => {
+    harryPotter.setCaracteristicasEspeciales("Tiene un escudo");
+    expect(harryPotter.caracteristicasEspeciales).to.be.eql("Tiene un escudo");
+  });
+
+  it("Setter del valor devuelve 10 ", () => {
+    harryPotter.setValor(10);
+    expect(harryPotter.valor).to.be.eql(10);
+  });
+
+
 
 });
