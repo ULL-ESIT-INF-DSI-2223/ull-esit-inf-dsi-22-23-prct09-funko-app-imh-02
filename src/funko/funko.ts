@@ -25,7 +25,7 @@ export enum GeneroFunko {
   MUSICA,
   ANIME,
 }
-
+//
 /**
  * Clase que representa a un Funko
  */
