@@ -130,4 +130,20 @@ export class Funko {
   get valor(): number {
     return this.valor_;
   }
+
+  obtenerJSON() {
+    const data = {
+      id: this.id_,
+      nombre: this.nombre_,
+      descripcion: this.descripcion_,
+      tipo: this.tipo_,
+      genero: this.genero_,
+      franquicia: this.franquicia_,
+      numeroFranquicia: this.numeroFranquicia_,
+      exclusivo: this.exclusivo_,
+      caracteristicasEspeciales: this.caracteristicasEspeciales_,
+      valor: this.valor_
+    }
+    return JSON.stringify(data);
+  }
 }
