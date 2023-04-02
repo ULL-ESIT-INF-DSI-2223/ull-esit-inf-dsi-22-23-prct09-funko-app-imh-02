@@ -22,3 +22,8 @@ log(
       " that becomes green again!"
   )
 );
+
+// verde >= 50
+// morado >= 30 - < 50
+// azul >= 10 < 30
+// rojo < 10

@@ -15,6 +15,7 @@ import fs, { existsSync } from 'fs';
 import { TiposFunko } from "./funko.js";
 import { GeneroFunko } from "./funko.js";
 import { json } from "stream/consumers";
+import { Console } from "console";
 
 export class FunkoCollection {
 
@@ -30,20 +31,17 @@ export class FunkoCollection {
   constructor (private nombreUsuario: string) {
     let path = "./db/";
     path += nombreUsuario;
-    try {
       if (fs.existsSync(path)) {
         console.log("existe el directorio");
         const ficherosFunkos = fs.readdirSync(path).toString().split(",");
-        ficherosFunkos.forEach((funko) => {
-          const data = fs.readFileSync(path + "/" + funko).toString();
-          const jsonObject = JSON.parse(data);
-          this.listaFunko.push(new Funko(jsonObject.id, jsonObject.nombre, jsonObject.descripcion, jsonObject.tipo, jsonObject.genero, jsonObject.franquicia, jsonObject.numeroFranquicia, jsonObject.exclusivo, jsonObject.caracteristicasEspeciales, jsonObject.valor));
-        });
+        if (ficherosFunkos[0] !== '') {
+          ficherosFunkos.forEach((funko) => {
+            const data = fs.readFileSync(path + "/" + funko).toString();
+            const jsonObject = JSON.parse(data);
+            this.listaFunko.push(new Funko(jsonObject.id, jsonObject.nombre, jsonObject.descripcion, jsonObject.tipo, jsonObject.genero, jsonObject.franquicia, jsonObject.numeroFranquicia, jsonObject.exclusivo, jsonObject.caracteristicasEspeciales, jsonObject.valor));
+          });
+        }
       }
-
-    } catch(err) {
-      console.error(err)
-    }
   }
 
   addFunko(newFunko: Funko) {
@@ -53,22 +51,22 @@ export class FunkoCollection {
       const jsonObject = JSON.parse(newFunko.obtenerJSON());
       this.listaFunko.push(new Funko(jsonObject.id, jsonObject.nombre, jsonObject.descripcion, jsonObject.tipo, jsonObject.genero, jsonObject.franquicia, jsonObject.numeroFranquicia, jsonObject.exclusivo, jsonObject.caracteristicasEspeciales, jsonObject.valor));
       console.log("Funko añadido");
-      return "funko añadido";
     } else {
-      console.log("Ya existe el funko");
+      console.log("Ya existe el funko con ese id");
     }
-    return "ya existe el funko";
+
+    return this.listaFunko;
   }
 
   getFunkoId(id: number) {
     const path = "./db/" + this.nombreUsuario + "/" + id + ".json";
     if(fs.existsSync(path)) {
-      const data = fs.readFileSync(path).toString();
-      console.log(data);
-    } else {
-      console.log("El funko no existe");
-    }
-    return "no existe";
+      const funko = this.listaFunko.find((funko) => funko.id === id);
+      funko?.imprimirFunko();
+      return funko;
+    } 
+    console.log("El funko no existe")
+    return undefined;
   }
 
   eraseFunko(id: number) {
@@ -78,6 +76,7 @@ export class FunkoCollection {
       console.log("Funko eliminado");
     } else {
       console.log("El funko no existe");
+      return undefined;
     }
 
     const result: Funko[] = [];
@@ -88,12 +87,29 @@ export class FunkoCollection {
     });
     this.listaFunko = result;
 
-    return "no existe";
+    return this.listaFunko;
   }
 
+  getAllFunkos() {
+    this.listaFunko.forEach((funko) => {
+      funko.imprimirFunko();
+    });
+    return this.listaFunko;
+  }
+
+  modifyFunko(id: number, modifiedFunko: Funko) {
+    const path = "./db/" + this.nombreUsuario + "/" + id + ".json";
+    if(fs.existsSync(path)) {
+      this.eraseFunko(id);
+      this.addFunko(modifiedFunko);
+      console.log("Funko modificado");
+      return this.listaFunko;
+    } else {
+      console.log("El funko no existe");
+      return undefined;
+    }
+  }
 }
 
-const funkolist = new FunkoCollection("usu1");
-const funko1 = new Funko(1, "Harry Potter", "Personaje Principal de la saga Harry Potter", TiposFunko.POP, GeneroFunko.PELICULAS, "Harry Potter", 1, false, "Cabeza balancea", 20);
-funkolist.addFunko(funko1);
-//funkolist.eraseFunko(1)
+
+ 

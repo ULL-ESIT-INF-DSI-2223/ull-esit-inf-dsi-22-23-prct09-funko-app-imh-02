@@ -10,6 +10,8 @@
  * @date 27/03/2023
  */
 
+import chalk from "chalk";
+
 export enum TiposFunko {
   POP = "POP!",
   POPRIDES = "POP!RIDES",
@@ -145,5 +147,29 @@ export class Funko {
       valor: this.valor_
     }
     return JSON.stringify(data);
+  }
+
+  imprimirFunko() {
+    console.log(`ID: ${this.id}`);
+    console.log(`Name: ${this.nombre}`);
+    console.log(`Description: ${this.descripcion}`);
+    console.log(`Type: ${this.tipo}`);
+    console.log(`Genre: ${this.genero}`);
+    console.log(`Franchise: ${this.franquicia}`);
+    console.log(`Franchise number: ${this.numeroFranquicia}`);
+    console.log(`Exclusive: ${this.exclusivo}`);
+    console.log(`Special features: ${this.caracteristicasEspeciales}`);
+    const log = console.log;
+    if (this.valor < 10) {
+      log(chalk.red(`Value: ${this.valor}`));
+    } else if (this.valor >= 10 && this.valor < 30) {
+      log(chalk.blue(`Value: ${this.valor}`));
+    } else if (this.valor >= 30 && this.valor < 50) {
+      log(chalk.magenta(`Value: ${this.valor}`));
+    } else {
+      log(chalk.green(`Value: ${this.valor}`));
+    }
+    
+    console.log("------------------------------------------");
   }
 }
