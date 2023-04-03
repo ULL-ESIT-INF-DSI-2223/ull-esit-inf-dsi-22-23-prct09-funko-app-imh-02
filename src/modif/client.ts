@@ -12,6 +12,11 @@
 
 import { listOperations } from "./list-operation.js";
 
+/**
+ * Función que alberga el código del cliente
+ * @param list_operations Operaciones que se realiarán
+ * @returns Resultado de las operaciones
+ */
 export function clientCode(list_operations: listOperations) {
     return list_operations.run();
 }

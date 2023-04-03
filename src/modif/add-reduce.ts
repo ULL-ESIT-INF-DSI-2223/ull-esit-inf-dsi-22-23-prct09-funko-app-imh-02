@@ -12,11 +12,19 @@
 
 import { listOperations } from "./list-operation.js";
 
+/**
+ * Clase que hereda de listOperations y que añade la funcionalidad reduce con la suma
+ */
 export class FilterMapAddReduce extends listOperations {
     constructor(protected NumberList: number[], protected filter_callback: (item: number) => boolean, protected callback_function_map: (item: number) => number) {
         super(NumberList, filter_callback, callback_function_map);
     }
 
+    /**
+     * Función que suma todos los elementos de una lista
+     * @param list Lista de números
+     * @returns Suma de todos los elementos de la lista
+     */
     reduce(list: number[]) {
         let result = 0;
         list.forEach((item) => {

@@ -18,6 +18,9 @@ import { json } from "stream/consumers";
 import { Console } from "console";
 import chalk from "chalk";
 
+/**
+ * Clase que representa una colección de funkos
+ */
 export class FunkoCollection {
 
   /**
@@ -47,6 +50,11 @@ export class FunkoCollection {
       }
   }
 
+  /**
+   * Método que añade un funko a la colección
+   * @param newFunko Funko a añadir 
+   * @returns Undefined en caso de ya existir el funko o la lista modificada en caso de añadirlo
+   */
   addFunko(newFunko: Funko) {
     const path = "./db/" + this.nombreUsuario + "/" + newFunko.id + ".json";
     if(!fs.existsSync(path)) {
@@ -62,6 +70,11 @@ export class FunkoCollection {
 
   }
 
+  /**
+   * Método que muestra un funko a partir de su id
+   * @param id Id del funko a mostrar
+   * @returns Undefined en caso de no existir el funko o el funko en caso de existir
+   */
   getFunkoId(id: number) {
     const path = "./db/" + this.nombreUsuario + "/" + id + ".json";
     if(fs.existsSync(path)) {
@@ -73,6 +86,11 @@ export class FunkoCollection {
     return undefined;
   }
 
+  /**
+   * Método que elimina un funko a partir de su id
+   * @param id Id del funko a eliminar
+   * @returns Undefined en caso de no existir el funko o la lista modificada en caso de eliminarlo
+   */
   eraseFunko(id: number) {
     const path = "./db/" + this.nombreUsuario + "/" + id + ".json";
     if(fs.existsSync(path)) {
@@ -94,6 +112,10 @@ export class FunkoCollection {
     return this.listaFunko;
   }
 
+  /**
+   * Método que muestra todos los funkos de la colección
+   * @returns Lista de funkos
+   */
   getAllFunkos() {
     this.listaFunko.forEach((funko) => {
       funko.imprimirFunko();
@@ -101,6 +123,12 @@ export class FunkoCollection {
     return this.listaFunko;
   }
 
+  /**
+   * Método que modifica un funko a partir de su id
+   * @param id Id del funko a modificar
+   * @param modifiedFunko Funko modificado
+   * @returns Undefined en caso de no existir el funko o la lista modificada en caso de modificarlo
+   */
   modifyFunko(id: number, modifiedFunko: Funko) {
     const path = "./db/" + this.nombreUsuario + "/" + id + ".json";
     if(fs.existsSync(path)) {
@@ -115,14 +143,5 @@ export class FunkoCollection {
   }
 }
 
-
-// const harryPotter = new Funko(2, "Harry Potter", "Personaje Principal de la saga Harry Potter", TiposFunko.POP, GeneroFunko.PELICULAS, "Harry Potter", 1, false, "Cabeza balancea", 20);
-// const capitanAmerica = new Funko(2,"Capitan América", "Tiene un escudo que le da poder", TiposFunko.POP, GeneroFunko.PELICULAS, "Marvel", 1, false, "Fuerza", 5);
-// const funkosCollection = new FunkoCollection("usu1");
-
-// funkosCollection.addFunko(harryPotter);
-// funkosCollection.getAllFunkos();
-// funkosCollection.modifyFunko(2, capitanAmerica);
-// funkosCollection.getAllFunkos();
 
  

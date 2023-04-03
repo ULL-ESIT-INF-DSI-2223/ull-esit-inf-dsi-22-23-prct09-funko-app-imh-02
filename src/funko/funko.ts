@@ -12,12 +12,20 @@
 
 import chalk from "chalk";
 
+/**
+ * Enumerado que representa los tipos de Funko
+ */
 export enum TiposFunko {
   POP = "POP!",
   POPRIDES = "POP!RIDES",
   VYNILSODA = "Vynil Soda",
   VYNILGOLD = "Vynil Gold",
 }
+
+
+/**
+ * Enumerado que representa los géneros de Funko
+ */ 
 export enum GeneroFunko {
   ANIMACION = "ANIMACION",
   PELICULAS = "PELICULAS",
@@ -27,7 +35,7 @@ export enum GeneroFunko {
   MUSICA = "MUSICA",
   ANIME = "ANIME",
 }
-//
+
 /**
  * Clase que representa a un Funko
  */
@@ -57,82 +65,152 @@ export class Funko {
     private valor_: number
   ) {}
   
+  /**
+   * Método para establecer el nombre de un Funko 
+   * @param nombre Nombre del funko
+   */
   setnombre(nombre: string) {
     this.nombre_ = nombre;
   }
 
+  /**
+   * Método para establecer el tipo de un Funko
+   * @param tipo Tipo de funko Pop!, Pop! Rides, Vynil Soda o Vynil Gold
+   */
   setTipo(tipo: TiposFunko) {
     this.tipo_ = tipo;
   }
 
+  /**
+   * Método para establecer la descripción de un Funko
+   * @param descripcion Descripción del Funko
+   */
   setDescripcion(descripcion: string) {
     this.descripcion_ = descripcion;
   }
 
+  /**
+   * Método para establecer el género de un Funko
+   * @param genero Género del funco (Animación, Películas, TV, videojuegos, deportes, música o anime)
+   */
   setGenero(genero: GeneroFunko) {
     this.genero_ = genero;
   }
 
+  /**
+   * Método para establecer la franquicia de un Funko
+   * @param franquicia Franquicia a la que pertenece por ejemplo Marvel o The Big Ban Theory
+   */
   setFranquicia(franquicia: string) {
     this.franquicia_ = franquicia;
   }
 
+  /**
+   * Método para establecer el número de franquicia de un Funko
+   * @param numeroFranquicia Número identificativo del Funko dentro de la franquicia correspondiente
+   */
   setNumeroFranquicia(numeroFranquicia: number) {
     this.numeroFranquicia_ = numeroFranquicia;
   }
 
+  /**
+   * Método para establecer si un Funko es exclusivo o no
+   * @param excluviso Verdadero en caso de que el funko sea exclusivo
+   */
   setExclusivo(excluviso: boolean) {
     this.exclusivo_ = excluviso;
   }
 
+  /**
+   * Método para establecer las características especiales de un Funko
+   * @param caracteristicasEspeciales String indicando la característica especial
+   */
   setCaracteristicasEspeciales(caracteristicasEspeciales: string) {
     this.caracteristicasEspeciales_ = caracteristicasEspeciales;
   }
 
+  /**
+   * Método para establecer el valor de un Funko
+   * @param valor Valor númerico positivo en el mercado
+   */
   setValor(valor: number ){
     this.valor_ = valor;
   }
 
+  /**
+   * Método para obtener el identificador de un Funko
+   */
   get id(): number {
     return this.id_;
   }
 
+  /**
+   * Método para obtener el nombre de un Funko
+   */
   get nombre(): string {
     return this.nombre_;
   }
 
+  /**
+   * Método para obtener el tipo de un Funko
+   */
   get tipo(): TiposFunko {
     return this.tipo_;
   }
 
+  /**
+   * Método para obtener la descripción de un Funko
+   */
   get descripcion(): string {
     return this.descripcion_;
   }
 
+  /**
+   * Método para obtener el género de un Funko
+   */
   get genero(): GeneroFunko {
     return this.genero_;
   }
 
+  /**
+   * Método para obtener la franquicia de un Funko
+   */
   get franquicia(): string {
     return this.franquicia_;
   }
 
+  /**
+   * Método para obtener el número de franquicia de un Funko
+   */
   get numeroFranquicia(): number {
     return this.numeroFranquicia_;
   }
 
+  /**
+   * Método para obtener si un Funko es exclusivo o no
+   */
   get exclusivo(): boolean {
     return this.exclusivo_;
   }
 
+  /**
+   * Método para obtener las características especiales de un Funko
+   */
   get caracteristicasEspeciales(): string {
     return this.caracteristicasEspeciales_;
   }
 
+  /**
+   * Método para obtener el valor de un Funko
+   */
   get valor(): number {
     return this.valor_;
   }
 
+  /**
+   * Método para obtener un objeto JSON con los datos del Funko
+   * @returns Devuelve un objeto JSON con los datos del Funko
+   */
   obtenerJSON() {
     const data = {
       id: this.id_,
@@ -149,6 +227,10 @@ export class Funko {
     return JSON.stringify(data);
   }
 
+  /**
+   * Método para imprimir por consola los datos del Funko
+   * @returns Devuelve un string con los datos del Funko
+   */
   imprimirFunko() {
     console.log(`ID: ${this.id}`);
     console.log(`Name: ${this.nombre}`);

@@ -12,11 +12,19 @@
 
  import { listOperations } from "./list-operation.js";
 
+ /**
+  * Clase que hereda de listOperations y que añade la funcionalidad reduce con la resta
+  */
  export class FilterMapSubReduce extends listOperations {
      constructor(protected NumberList: number[], protected filter_callback: (item: number) => boolean, protected callback_function_map: (item: number) => number) {
          super(NumberList, filter_callback, callback_function_map);
      }
- 
+     
+     /**
+      * Función que resta todos los elementos de una lista
+      * @param list Lista de números
+      * @returns Resta de todos los elementos de la lista
+      */
      reduce(list: number[]) {
          let result = 0;
          list.forEach((item) => {

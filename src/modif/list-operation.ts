@@ -41,10 +41,10 @@ export abstract class listOperations {
     // Métodos con operaciones por defecto
 
     /**
-     * 
-     * @param elements 
-     * @param callback_function 
-     * @returns 
+     * Método que recibe una lista de números y una función callback que se encarga de filtrar los elementos de la lista
+     * @param elements Lista de números
+     * @param callback_function Función callback
+     * @returns Lista de números filtrada
      */
     filter(elements: number[], callback_function: (item: number) => boolean): number[]{
         const result: number[] = [];
@@ -56,6 +56,12 @@ export abstract class listOperations {
         return result;
     }
 
+    /**
+     * Método que recibe una lista de números y una función callback que se encarga de realizar una operación sobre cada elemento de la lista
+     * @param elements Lista de números
+     * @param callback_function Función callback
+     * @returns Lista de números con la operación realizada
+     */
     map(elements: number[], callback_function: (item: number) => number): number[]{
         const result: number[] = [];
         elements.forEach((element) => {
@@ -65,12 +71,28 @@ export abstract class listOperations {
     }
 
     // Método con operaciones abstractas
+    /**
+     * Método que recibe una lista de números y realiza una operación sobre cada elemento de la lista
+     * @param elements Lista de números
+     */
     abstract reduce(elements: number[]): number;
 
     // Métodos hook
+    
+    /**
+     * Método hook que se ejecuta después de filter
+     * @param list Lista de números
+     * @returns Retorna un string con la lista de números
+     */
     afterFilter(list: number[]): string {
         return list.toString(); 
     };
+
+    /**
+     * Método hook que se ejecuta después de map
+     * @param list Lista de números
+     * @returns Retorna un string con la lista de números
+     */
     afterMap(list: number[]):string {
         return list.toString();
     };
