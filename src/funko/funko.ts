@@ -19,13 +19,13 @@ export enum TiposFunko {
   VYNILGOLD = "Vynil Gold",
 }
 export enum GeneroFunko {
-  ANIMACION,
-  PELICULAS,
-  TV,
-  VIDEOJUEGOS,
-  DEPORTES,
-  MUSICA,
-  ANIME,
+  ANIMACION = "ANIMACION",
+  PELICULAS = "PELICULAS",
+  TV = "TV",
+  VIDEOJUEGOS = "VIDEOJUEGOS",
+  DEPORTES = "DEPORTES",
+  MUSICA = "MUSICA",
+  ANIME = "ANIME",
 }
 //
 /**
@@ -171,5 +171,6 @@ export class Funko {
     }
     
     console.log("------------------------------------------");
+    return "ID: " + this.id + " Name: " + this.nombre + " Description: " + this.descripcion + " Type: " + this.tipo + " Genre: " + this.genero + " Franchise: " + this.franquicia + " Franchise number: " + this.numeroFranquicia + " Exclusive: " + this.exclusivo + " Special features: " + this.caracteristicasEspeciales + " Value: " + this.valor;
   }
 }

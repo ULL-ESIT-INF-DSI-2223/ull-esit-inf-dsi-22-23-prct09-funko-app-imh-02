@@ -101,6 +101,14 @@ describe('Getter y setters de un Funko', () => {
     expect(harryPotter.valor).to.be.eql(10);
   });
 
+  it("Imprimir el funko ", () => {
+    expect(harryPotter.imprimirFunko()).to.be.eql("ID: 1 Name: Capitán América Description: Personaje relevante en Marvel Type: POP!RIDES Genre: ANIMACION Franchise: Marvel Franchise number: 2 Exclusive: true Special features: Tiene un escudo Value: 10");
+  });
+
+  it("Imprimir un funko con valor magenta ", () => {
+    const funkoMagenta = new Funko(1, "Harry Potter", "Personaje Principal de la saga Harry Potter", TiposFunko.POP, GeneroFunko.PELICULAS, "Harry Potter", 1, false, "Cabeza balancea", 40);
+    expect(funkoMagenta.imprimirFunko()).to.be.eql("ID: 1 Name: Harry Potter Description: Personaje Principal de la saga Harry Potter Type: POP! Genre: PELICULAS Franchise: Harry Potter Franchise number: 1 Exclusive: false Special features: Cabeza balancea Value: 40");
+  });
 
 
 });
