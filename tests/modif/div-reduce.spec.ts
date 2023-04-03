@@ -15,7 +15,7 @@
  import {FilterMapDivReduce} from '../../src/modif/div-reduce.js';
  import {clientCode} from '../../src/modif/client.js';
  
- describe('Getter y setters de un Funko', () => {
+ describe('FilterMapDivReduce', () => {
    const divReduce = new FilterMapDivReduce([1,2,3,4], i => i >= 2, i => i * 2);
    it("Método run para divReduce resulta 5.33", () => {
      expect(clientCode(divReduce)).to.be.eql(5.33);

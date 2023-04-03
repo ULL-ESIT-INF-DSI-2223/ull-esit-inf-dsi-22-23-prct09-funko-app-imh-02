@@ -1,6 +1,8 @@
 {
   "entryPoints": [
-    "./src/basicFunctions.ts",
+    "./src/funko/*.ts",
+    "./src/gestor/*.ts",
+    "./src/modif/*.ts"
   ],
   "out": "./docs"
 }

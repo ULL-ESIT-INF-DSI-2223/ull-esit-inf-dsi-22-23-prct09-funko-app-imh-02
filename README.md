@@ -1,4 +1,3 @@
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-8d59dc4de5201274e310e4c54b9627a8934c3b88527886e3b421487c677d23eb.svg)](https://classroom.github.com/a/fmDo8ROl)
 # Práctica 9 - Aplicación de registro de Funko Pops
 
 Ismael Martín Herrera *alu0101397375@ull.edu.es*
@@ -14,7 +13,7 @@ Ismael Martín Herrera *alu0101397375@ull.edu.es*
 
 ## Introducción
 
-La práctica 9 de la asignatura DSI consiste en el desarrollo de una aplicación para el registro de Funko Pops, haciendo uso de la API síncrona de Node.js para el tratamiento del sistema de ficheros. En este sentido, los datos que maneja la aplicación permanecerán persistentes en el sistema, y con la siguiente estructura: 
+La práctica 9 de la asignatura de DSI consiste en el desarrollo de una aplicación para el registro de Funko Pops, haciendo uso de la API síncrona de Node.js para el tratamiento del sistema de ficheros. En este sentido, los datos que maneja la aplicación permanecerán persistentes en el sistema, y con la siguiente estructura: 
 
 - usuario1
   - funko1.json
@@ -26,7 +25,7 @@ Por tanto, cada usuario tendrá su propio directorio, en el que albergará la in
 
 ## Instalación de paquetes
 
-Para la realización de esta prácticas se ha hecho uso de dos paquetes nuevos. Por un lado, ```yargs``` que permite la interacción con la aplicación a través de la línea de comandos. Respecto a su instalación he seguido las indicaciones del guión de la práctica: 
+Para la realización de esta prácticas he hecho uso de dos paquetes nuevos. Por un lado, ```yargs``` que permite la interacción con la aplicación a través de la línea de comandos. Respecto a su instalación he seguido las indicaciones del guión de la práctica: 
 
 ```
 npm i yargs
@@ -45,7 +44,7 @@ Finalmente, cabe destacar que en esta prácita también he realizado una serie d
 
 En esta práctica tal y como se indica en la introducción, se pedía el desarrollo de una aplicación para el registro de Funko Pops, cuyos datos fueran persistentes y con la posibilidad de ser usada por más de un usuario, pero no de manera simultánea. Asimismo, cabe destacar también que para la interacción con la aplicación se debe utilizar la línea de comandos, para lo que se ha utilizado el paquete ```yargs```. 
 
-La solución que he adoptado, consiste en primer lugar, en el desarrollo de la clase ```Funko``` que en base a las siguientes expectativas: 
+La solución que he adoptado, consiste en primer lugar, en el desarrollo de la clase ```Funko``` en base a las siguientes expectativas: 
 
 ```ts
 describe('Getter y setters de un Funko', () => {
@@ -148,7 +147,7 @@ describe('Getter y setters de un Funko', () => {
 });
 ```
 
-Esta permite representar toda la información de cada uno de los Funkos. 
+Esta clase permite representar toda la información de cada uno de los Funkos. 
 
 ```ts
 export class Funko {
@@ -608,8 +607,135 @@ Respecto al ejercicio de modificación a realizar en el PE el enunciado es el si
     Por último, recuerde que deberá incluir la documentación de su proyecto haciendo uso de TypeDoc.
 ```
 
+En primer lugar, he desarrollado la clase abstracta ```listOperations``` con el método template ```run()```. En el método template tal y como indica el patrón de desarrollo a seguir ```template method```, es el que define las operaciones o pasos a llevar a cabo. Asimismo, en esta clase abstracta también he proporcionado un comportamiento por defecto para dos de las tres operaciones. Por un lado, el método ```filter()``` que recibe como parámetros la lista de elementos y una función de callback que se guarda como propiedad de la clase en el constructor. Y por otro lado, la operación ```map()```. Además de estos método por defecto, también he desarrollado unos méotods de enganche o ```hooks``` y el método abstracto ```reduce()```, cuya implementación es obligatorio en las subclases, esto se justifica porque las diferentes subclases a desarollar, ```FilterMapAddReduce```, ```FilterMapDivReduce```, ```FilterMapProdReduce``` y ```FilterMapSubReduce``` implementan el ```reduce()``` de una manera diferente. Puesto que, mientras que en el ```AddReduce``` se implementa como suma de los elementos del array, ```ProdReduce``` realiza una multiplicación.  
+
+```ts
+export class FilterMapAddReduce extends listOperations {
+    constructor(protected NumberList: number[], protected filter_callback: (item: number) => boolean, protected callback_function_map: (item: number) => number) {
+        super(NumberList, filter_callback, callback_function_map);
+    }
+
+    /**
+     * Función que suma todos los elementos de una lista
+     * @param list Lista de números
+     * @returns Suma de todos los elementos de la lista
+     */
+    reduce(list: number[]) {
+        let result = 0;
+        list.forEach((item) => {
+            result = result + item;
+        });
+        return result;
+    } 
+}
+```
+
+```ts
+ export class FilterMapDivReduce extends listOperations {
+    
+     constructor(protected NumberList: number[], protected filter_callback: (item: number) => boolean, protected callback_function_map: (item: number) => number) {
+         super(NumberList, filter_callback, callback_function_map);
+     }
+     
+     /**
+      * Función que divide todos los elementos de una lista
+      * @param list Lista de números
+      * @returns División de todos los elementos de la lista
+      */
+     reduce(list: number[]) {
+         let result = 1;
+         list.forEach((item) => {
+             result = item / result;
+         });
+         return Number(result.toFixed(2));
+     } 
+ }
+```
+
+```ts
+ export class FilterMapProdReduce extends listOperations {
+     constructor(protected NumberList: number[], protected filter_callback: (item: number) => boolean, protected callback_function_map: (item: number) => number) {
+         super(NumberList, filter_callback, callback_function_map);
+     }
+     
+     /**
+      * Función que multiplica todos los elementos de una lista
+      * @param list Lista de números
+      * @returns Multiplicación de todos los elementos de la lista
+      */
+     reduce(list: number[]) {
+         let result = 1;
+         list.forEach((item) => {
+             result = result * item;
+         });
+         return result;
+     } 
+ }
+```
+
+```ts
+ export class FilterMapSubReduce extends listOperations {
+     constructor(protected NumberList: number[], protected filter_callback: (item: number) => boolean, protected callback_function_map: (item: number) => number) {
+         super(NumberList, filter_callback, callback_function_map);
+     }
+     
+     /**
+      * Función que resta todos los elementos de una lista
+      * @param list Lista de números
+      * @returns Resta de todos los elementos de la lista
+      */
+     reduce(list: number[]) {
+         let result = 0;
+         list.forEach((item) => {
+            result = item - result;
+         });
+         return result;
+     } 
+ }
+```
+
+Cabe añadir que las clases que las clases desarrolladas basan su funcionamiento en una serie de expectativas cuyos resultados son los siguientes: 
+
+```
+  FilterMapAddReduce
+    ✔ Método run con clientCode para addReduce resulta 18
+    ✔ Método filter para addReduce resulta [2,3,4] 
+    ✔ Método map para addReduce resulta [4,6,8] 
+    ✔ Método reduce para addReduce resulta  
+    ✔ Método afterFilter para addReduce resulta  2,3,4
+    ✔ Método afterMap para addReduce resulta  4,6,8
+
+  FilterMapDivReduce
+    ✔ Método run para divReduce resulta 5.33
+    ✔ Método filter para divReduce resulta [2,3,4] 
+    ✔ Método map para divReduce resulta [4,6,8] 
+    ✔ Método reduce para divReduce resulta  5.33
+    ✔ Método afterFilter para divReduce resulta  2,3,4
+    ✔ Método afterMap para divReduce resulta  4,6,8
+    ✔ Método afterFilter para divReduce resulta  2,3,4
+    ✔ Método afterMap para divReduce resulta  4,6,8
+
+  FilterMapProdReduce
+    ✔ Método run para prodReduce resulta 192
+    ✔ Método filter para prodReduce resulta [2,3,4] 
+    ✔ Método reduce para prodReduce resulta  192
+    ✔ Método map para prodReduce resulta [4,6,8] 
+    ✔ Método afterFilter para prodReduce resulta  2,3,4
+    ✔ Método afterMap para prodReduce resulta  4,6,8
+
+  FilterMapSubReduce
+    ✔ Método run para subReduce resulta 6
+    ✔ Método filter para subReduce resulta [2,3,4] 
+    ✔ Método map para subReduce resulta [4,6,8] 
+    ✔ Método reduce para subReduce resulta  6
+```
+
 ## Conclusión 
+
+A modo de conclusión, en esta práctica he profundizado en el uso de la API síncrona de Node.js para trabajar con el sistema de ficheros, entendiendo su funcionamiento, parámetros y el carácter síncrono de los métodos empleados. 
 
 ## Referencias
 
 [1 Escribir ficheros JSON](https://www.tutorialkart.com/nodejs/node-js-write-json-object-to-file/)
+
+[2 Guión de la práctica](https://ull-esit-inf-dsi-2223.github.io/prct09-filesystem-funko-app/)

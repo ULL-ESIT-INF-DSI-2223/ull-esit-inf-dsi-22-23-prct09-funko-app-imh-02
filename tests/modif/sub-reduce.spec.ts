@@ -15,7 +15,7 @@
  import {FilterMapSubReduce} from '../../src/modif/sub-reduce.js';
  import {clientCode} from '../../src/modif/client.js';
  
- describe('Getter y setters de un Funko', () => {
+ describe('FilterMapSubReduce', () => {
    const subReduce = new FilterMapSubReduce([1,2,3,4], i => i >= 2, i => i * 2);
    it("Método run para subReduce resulta 6", () => {
      expect(clientCode(subReduce)).to.be.eql(6);

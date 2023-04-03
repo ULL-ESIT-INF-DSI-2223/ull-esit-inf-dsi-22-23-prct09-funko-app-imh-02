@@ -15,7 +15,7 @@
  import {FilterMapProdReduce} from '../../src/modif/prod-reduce.js';
  import {clientCode} from '../../src/modif/client.js';
  
- describe('Getter y setters de un Funko', () => {
+ describe('FilterMapProdReduce', () => {
    const prodReduce = new FilterMapProdReduce([1,2,3,4], i => i >= 2, i => i * 2);
    it("Método run para prodReduce resulta 192", () => {
      expect(clientCode(prodReduce)).to.be.eql(192);
