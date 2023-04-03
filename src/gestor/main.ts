@@ -5,11 +5,12 @@ import { Funko } from '../funko/funko.js';
 import { TiposFunko } from '../funko/funko.js';
 import { GeneroFunko } from '../funko/funko.js';
 
+const commands = hideBin(process.argv);
 /**
  * Comando para añadir un Funko a la colección
  */
 function add() {
-  yargs(hideBin(process.argv))
+  yargs(commands)
     .command('add', 'Adds a funko', {
     user: {
       description: 'User',
@@ -120,7 +121,7 @@ function add() {
  * Comando para listar todos los Funkos de un usuario
  */
 function list() {
-  yargs(hideBin(process.argv))
+  yargs(commands)
     .command('list', 'List all user Funkos', {
     user: {
      description: 'user',
@@ -140,7 +141,7 @@ function list() {
  */
 function update() {
 
-  yargs(hideBin(process.argv))
+  yargs(commands)
    .command('update', 'Update a Funko', {
    user: {
      description: 'User',
@@ -250,7 +251,7 @@ function update() {
   * Comando para eliminar un Funko de la colección
   */
  function read() {
-   yargs(hideBin(process.argv))
+   yargs(commands)
     .command('read', 'Show al information of a Funko', {
     user: {
      description: 'user',
@@ -275,7 +276,7 @@ function update() {
   * Comando para eliminar un Funko de la colección
   */
 function remove() {
-  yargs(hideBin(process.argv))
+  yargs(commands)
   .command('remove', 'Remove a funko', {
   user: {
    description: 'user',
